@@ -11,6 +11,11 @@ WORKDIR /restknotapi
 COPY ./requirements.txt /restknotapi/requirements.txt
 
 RUN pip3 install -r /restknotapi/requirements.txt
+
+# add git hash to version.txt
+ARG GIT_COMMIT=__UNKNOWN__
+RUN echo "$GIT_COMMIT" > ./version.txt
+
 COPY . /restknotapi
 
 RUN apk del gcc linux-headers musl-dev && \
